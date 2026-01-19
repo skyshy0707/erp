@@ -1,0 +1,28 @@
+{
+  "name": "erp",
+  "version": "1.0.0",
+  "description": "file serving service",
+  "license": "ISC",
+  "author": "skyshy0707",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "5.2.1",
+    "get-function-params": "2.0.7",
+    "http-json-errors": "1.2.12",
+    "js-base64": "3.7.8", 
+    "jsonwebtoken": "9.0.3",
+    "mysql2": "3.16.0",
+    "multer": "2.0.2",
+    "request-ip": "3.3.0",
+    "sequelize": "6.37.7",
+    "sequelize-to-json": "0.10.4", 
+    "@sequelize/cli": "6.6.3",
+    "@sequelize/core": "7.0.0-alpha.47",
+    "@sequelize/mysql": "7.0.0-alpha.47"
+  }
+}

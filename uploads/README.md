@@ -1,0 +1,1 @@
+This directory for uploads of service `file`.
