@@ -7,21 +7,21 @@ services:
       dockerfile: Dockerfile.database
     container_name: db
     env_file:
-      ./.env.db.example
+      ./.env.db
     ports:
       - "3306:3306"
     restart:
         unless-stopped
-    volumes:
-      - ./db.vol/db.conf:/etc/mysql/conf.d
-      - ./db.vol/db/erp:/var/lib/mysql/erp
+    #volumes:
+    #  - ./db.vol/db.conf:/etc/mysql/conf.d
+    #  - ./db.vol/db/erp:/var/lib/mysql/erp
   server:
     build:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - ./.env.example
-      - ./.env.db.example
+      - ./.env
+      - ./.env.db
     expose:
       - 8000
     ports:
