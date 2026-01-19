@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.database
     container_name: db
     env_file:
-      ./.env.db
+      ./.env.db.example
     ports:
       - "3306:3306"
     restart:
@@ -19,8 +19,8 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - ./.env
-      - ./.env.db
+      - ./.env.example
+      - ./.env.db.example
     expose:
       - 8000
     ports:
