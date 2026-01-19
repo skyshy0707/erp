@@ -12,8 +12,9 @@ services:
       - "3306:3306"
     restart:
         unless-stopped
-    #volumes:
-    #  - ./db.vol/db.conf:/etc/mysql/conf.d
+    volumes:
+      - ./db.vol/db.conf:/etc/mysql/conf.d
+      - ./db.vol/db/erp:/var/lib/mysql/erp
   server:
     build:
       context: .
