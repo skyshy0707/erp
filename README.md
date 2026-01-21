@@ -53,11 +53,13 @@ HTTP Status 201
 
 JSON: 
 
+```json
 {
     "token": <Encrypted JWT Token>,
     "refreshToken": <Encrypted JWT Token>,
     "createdAt": <Date ISO>
 }
+```
 
 **Refresh JWT token**
 
@@ -71,11 +73,13 @@ Authorization Bearer <JWT Token>
 
 JSON: 
 
+```json
 {
     "token": <Encrypted JWT Token>,
     "refreshToken": <Encrypted JWT Token>,
     "createdAt": <Date ISO>
 }
+```
 
 **Register a new account**
 
@@ -85,11 +89,13 @@ JSON:
 
 as JSON: 
 
+```json
 {
     "email": <Base64 encoded string>
     "phone": <Base64 encoded string>
     "password": <Base64 encoded string>
 }
+```
 
 ## Service `File`
 
@@ -107,10 +113,26 @@ Authorization Bearer <JWT Token>
 
 JSON: 
 
+```json
 {
-    "items"
+    "items": [
+        {
+            "id": `<string>`,
+            "name": `<string>`,
+            "extension": `<string>`,
+            "mime_type": `<string>`,
+            "size": `<string>`,
+            "user_id": `<number>`,
+            "upload_at": `<Date ISO>`,
+            "url": `<string>`
+        },
+        ...
+    ],
+    "offset": "<number>, default 0",
+    "limit": `<number>, default 10`,
+    "total": `<number>`
 }
-
+```
 
 **Get a file info by id**
 
