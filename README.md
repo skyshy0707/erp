@@ -15,9 +15,7 @@
 
 Authorization Bearer `<JWT Token>`
 
-*response*
-
-HTTP Status 200
+Response HTTP Status 200:
 
 JSON:
 
@@ -35,9 +33,7 @@ JSON:
 
 Authorization Bearer <JWT Token>
 
-*response*
-
-HTTP Status 200
+Response HTTP Status 200:
 
 **Log-in**
 
@@ -47,9 +43,7 @@ HTTP Status 200
 
 Authorization Basic <Base64 Encoded id:password>
 
-*response*
-
-HTTP Status 201
+Response HTTP Status 201:
 
 JSON: 
 
@@ -69,7 +63,7 @@ JSON:
 
 Authorization Bearer <JWT Token>
 
-*response*
+Response HTTP Status 201:
 
 JSON: 
 
@@ -85,7 +79,9 @@ JSON:
 
 <code style="color : olive">POST</code> /signup 
 
-*body*
+Request
+
+*body*:
 
 as JSON: 
 
@@ -94,6 +90,16 @@ as JSON:
     "email": <Base64 encoded string>
     "phone": <Base64 encoded string>
     "password": <Base64 encoded string>
+}
+```
+
+Response HTTP Status 201:
+
+JSON 
+
+```json
+{
+    "id": <number>
 }
 ```
 
@@ -109,7 +115,7 @@ Authorization Bearer <JWT Token>
 
 <code style="color : green">GET</code> /list 
 
-*response*
+Response HTTP Status 200:
 
 JSON: 
 
@@ -117,20 +123,20 @@ JSON:
 {
     "items": [
         {
-            "id": `<string>`,
-            "name": `<string>`,
-            "extension": `<string>`,
-            "mime_type": `<string>`,
-            "size": `<string>`,
-            "user_id": `<number>`,
-            "upload_at": `<Date ISO>`,
-            "url": `<string>`
+            "id": <string>,
+            "name": <string>,
+            "extension": <string>,
+            "mime_type": <string>,
+            "size": <string>,
+            "user_id": <number>,
+            "upload_at": <Date ISO>,
+            "url": <string>
         },
         ...
     ],
     "offset": "<number>, default 0",
-    "limit": `<number>, default 10`,
-    "total": `<number>`
+    "limit": <number>, default 10,
+    "total": <number>
 }
 ```
 
@@ -138,18 +144,116 @@ JSON:
 
 <code style="color : green">GET</code> /:id 
 
+Request
+
 *Path params*
 
 id
 
-/download/:id Download file by id
+Response HTTP Status 200:
 
-/delete/:id Delete the file
+JSON
 
-/upload Upload a new file
+```json
+{
+    "id": <string>,
+    "name": <string>,
+    "extension": <string>,
+    "mime_type": <string>,
+    "size": <string>,
+    "user_id": <number>,
+    "upload_at": <Date ISO>,
+    "url": <string>
+}
+```
 
-/update/:id Update the file or create a new file (if such file with this `id` is not exist)
+**Download file by id**
 
-#### $\textsf{\color{#00ff00}{#00ff00}}$
+<code style="color : green">GET</code> /download/:id 
 
-<h6 style="color: green">GET</h6> /info 
+Request
+
+*Path params*
+
+id
+
+Response HTTP Status 200
+
+**Delete the file**
+
+<code style="color : purple">DELETE</code> /delete/:id
+
+Response HTTP Status 200:
+
+JSON
+
+```json
+
+{
+    "message": "Delete success",
+    "detail": "File id: <number>"
+}
+
+```
+
+**Upload a new file**
+
+<code style="color : olive">POST</code> /upload 
+
+Request
+
+*body*:
+
+body.file: Buffer
+
+Response HTTP Status 201:
+
+JSON 
+
+```json
+
+{
+    "message": "Success",
+    "result": {
+        "id": <string>,
+        "name": <string>,
+        "extension": <string>,
+        "mime_type": <string>,
+        "size": <string>,
+        "user_id": <number>,
+        "upload_at": <Date ISO>,
+        "url": <string>
+    }
+}
+```
+
+**Update the file or create a new file (if such file with this `id` is not exist)**
+
+<code style="color : blue">PUT</code> /update/:id 
+
+Request
+
+*body*:
+
+body.file: Buffer
+
+Response HTTP Status 200 (if file exist):
+
+JSON
+
+```json
+{
+    "message": "Success. File with id=133 was created."
+}
+```
+
+
+Response HTTP Status 201 (if file not exist):
+
+JSON
+
+```json 
+{
+    "message": "Success. File with id=133 was updated."
+}
+```
