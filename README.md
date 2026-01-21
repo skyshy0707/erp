@@ -6,7 +6,9 @@ Prefix: /api - for all endpoints
 
 ## Service `Auth`
 
-GET /info Get the user id
+**Get the user id**
+
+GET /info 
 
 *headers*
 
@@ -22,7 +24,9 @@ JSON:
     "id": `<number>`
 }
 
-GET /logout Logout from service
+**Logout from service**
+
+GET /logout 
 
 *headers*
 
