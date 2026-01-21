@@ -10,7 +10,7 @@ GET /info Get the user id
 
 *headers*
 
-Authorization Bearer <JWT Token>
+Authorization Bearer `<JWT Token>`
 
 *response*
 
@@ -19,7 +19,7 @@ HTTP Status 200
 JSON:
 
 {
-    "id": <number>
+    "id": `<number>`
 }
 
 GET /logout Logout from service
