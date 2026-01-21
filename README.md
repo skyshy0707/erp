@@ -111,7 +111,7 @@ JSON
 
 `Authorization Bearer <JWT Token>`
 
-<h3>File endpoinsts:<h3>
+### File endpoinsts:
 
 **Get info of all your files**
 
