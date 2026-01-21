@@ -245,7 +245,7 @@ JSON
 
 ```json
 {
-    "message": "Success. File with id=133 was created."
+    "message": "Success. File with id=<number> was created."
 }
 ```
 
@@ -256,6 +256,265 @@ JSON
 
 ```json 
 {
-    "message": "Success. File with id=133 was updated."
+    "message": "Success. File with id=<number> was updated."
 }
 ```
+
+## Possible HTTP Error Responses as JSON:
+
+**Bad data**
+
+Status code: 400
+
+### Endpoint list:
+
+* Register a new account
+* Upload a new file
+* Update the file or create a new file
+
+
+```json
+{
+    "message": "Bad data",
+    "detail": "Validation Error: Validation is on <fieldname> failed"
+}
+```
+
+
+
+
+### Get a file info by id
+
+**Doesn't exist**
+
+Occur at the file request and if this file not exist anymore
+
+Status code: 404
+
+```json
+{
+    "message": "Resource doesn\'t exist",
+    "detail": "Requested file with id=<number> doesn't exist anymore"
+}
+```
+
+### Log-in
+
+**User not found**
+
+No user with this token assocoated
+
+Status code: 401
+
+```json
+{
+    "message": "User wasn\'t found",
+    "detail": null
+}
+```
+
+**Wrong credentials**
+
+Incorrect token or unappropriate user credentials
+
+Status code: 403
+
+```json
+{
+    "message": "Wrong credentials",
+    "detail": null
+}
+```
+
+### Refresh JWT token
+
+**Unsupported token**
+
+If user use refreshToken to authorize at protected endpoints excluding `/signin/new_token` and
+vice versa if temporary token used to authoriza at `/signin/new_token` for self-refresh
+
+Status code 401
+
+```json
+{
+    "message": "Unsupported token",
+    "detail": null
+}
+```
+
+### Register a new account
+
+
+**Bad data**
+
+Status code: 400
+
+```json
+{
+    "message": "Bad data",
+    "detail": "Validation Error: Validation is on <fieldname> failed"
+}
+```
+
+**Conflict**
+
+Staus code 409
+
+```json
+{
+    "message": "Resource is exist. Conflict. Try with another id",
+    "detail": "User exist already with this credentials"
+}
+```
+
+### Get a file info by id
+
+You try to access not your owned  file
+
+Status code 403
+
+**Not enought rights**
+
+```json
+{
+    "message": "Not enought rights",
+    "detail":" You don\'t have permissions for this action"
+}
+```
+
+**Doesn't exist**
+
+Status code 404
+
+```json
+{
+    "message": "Resource doesn\'t exist",
+    "detail": "File doesn\'t exist with id=<number>"
+}
+```
+
+### Delete the file
+
+**Fail to delete**
+
+Occur if file is blocked by superuser and/or have highest access level.
+
+Status code: 400
+
+```json
+{ 
+    "message": "Fail to delete",
+    "detail": "Fail to delete file with this id=<number>"
+}
+```
+
+**Doesn't exist**
+
+Occur at the file request and if this file not exist anymore
+
+Status code: 404
+
+```json
+{
+    "message": "Resource doesn\'t exist",
+    "detail": "Requested file with id=<number> doesn't exist anymore"
+}
+```
+
+### Upload a new file
+
+
+
+
+
+    fail_to_upload: (detail=null) => { return {
+        code: 400, 
+        body: { 
+            message: 'Fail to upload',
+            detail: detail
+        }
+    }},
+    auth_data_dont_received: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Auth data don\'t received',
+            detail: detail
+        }
+    }},
+    token_expired: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Token expired',
+            detail: detail
+        }
+    }},
+    token_invalid: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Token invalid',
+            detail: detail
+        }
+    }},
+    token_not_found: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Token wasn\'t found',
+            detail: detail
+        }
+    }},
+    token_not_provided: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Token wasn\'t provided or invalid',
+            detail: detail
+        }
+    }},
+    unappropriate_method_auth: (detail=null) => { return {
+        code: 401, 
+        body: { 
+            message: 'Inappropriate auth method used',
+            detail: detail
+        }
+    }},
+    user_not_found: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'User wasn\'t found',
+            detail: detail
+        }
+    }},
+    unsupported_token: (detail=null) => { return {
+        code: 401, 
+        body: {
+            message: 'Unsupported token',
+            detail: detail
+        }
+    }},
+    not_enough_rights: (detail=null) => { return {
+        code: 403, 
+        body: {
+            message: 'Not enought rights',
+            detail: detail
+        }
+    }},
+    wrong_credentials: (detail=null) => { return {
+        code: 403, 
+        body: {
+            message: 'Wrong credentials',
+            detail: detail
+        }
+    }},
+    doesnt_exist: (detail=null) => { return {
+        code: 404, 
+        body: {
+            message: 'Resource doesn\'t exist',
+            detail: detail
+        }
+    }},
+    conflict: (detail=null) => { return {
+        code: 409, 
+        body: {
+            message: 'Resource is exist. Conflict. Try with another id',
+            detail: detail
+        }
+    }
