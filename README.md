@@ -105,11 +105,13 @@ JSON
 
 ## Service `File`
 
-<h5>Prefix: /file<h5>
+<h4>Prefix: /file<h4>
 
-*headers for all `file` endpoints*
+*headers for all `file` endpoints*:
 
-Authorization Bearer <JWT Token>
+`Authorization Bearer <JWT Token>`
+
+<h4>File endpoinsts:<h4>
 
 **Get info of all your files**
 
