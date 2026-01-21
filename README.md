@@ -8,7 +8,7 @@ Prefix: /api - for all endpoints
 
 **Get the user id**
 
-<svg width="100" height="50" xmlns="http://www.w3.org/2000/svg"><text x="10" y="30" fill="green" font-family="Arial">GET</text></svg> /info 
+https://placehold.it/150/ffffff/ff0000?text=GET /info 
 
 *headers*
 
