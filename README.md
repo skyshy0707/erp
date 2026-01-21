@@ -11,7 +11,7 @@
 
 <code style="color : green">GET</code> /info 
 
-*headers*
+*headers*:
 
 Authorization Bearer `<JWT Token>`
 
@@ -29,7 +29,7 @@ JSON:
 
 <code style="color : green">GET</code> /logout 
 
-*headers*
+*headers*:
 
 Authorization Bearer <JWT Token>
 
@@ -39,7 +39,7 @@ Response HTTP Status 200:
 
 <code style="color : olive">POST</code> /signin 
 
-*headers*
+*headers*:
 
 Authorization Basic <Base64 Encoded id:password>
 
@@ -59,7 +59,7 @@ JSON:
 
 <code style="color : olive">POST</code> /signin/new_token 
 
-*headers*
+*headers*:
 
 Authorization Bearer <JWT Token>
 
@@ -148,9 +148,9 @@ JSON:
 
 Request
 
-*Path params*
+*Path params*:
 
-id
+id: `<number>`
 
 Response HTTP Status 200:
 
@@ -175,9 +175,9 @@ JSON
 
 Request
 
-*Path params*
+*Path params*:
 
-id
+id: `<number>`
 
 Response HTTP Status 200
 
