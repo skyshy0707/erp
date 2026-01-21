@@ -9,9 +9,7 @@ Prefix: /api - for all endpoints
 **Get the user id**
 
 
-<h6 style="color: green">GET</h6>
-
-/info 
+$green[GET] /info 
 
 *headers*
 
@@ -106,3 +104,5 @@ id
 /update/:id Update the file or create a new file (if such file with this `id` is not exist)
 
 #### $\textsf{\color{#00ff00}{#00ff00}}$
+
+<h6 style="color: green">GET</h6> /info 
