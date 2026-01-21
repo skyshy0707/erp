@@ -8,7 +8,9 @@ Prefix: /api - for all endpoints
 
 **Get the user id**
 
-https://placehold.it/150/ffffff/ff0000?text=GET /info 
+```html
+<font color="green">GET</font>
+```/info 
 
 *headers*
 
