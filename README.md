@@ -2,7 +2,7 @@
 
 # API
 
-Prefix: /api - for all endpoints
+<h4>Prefix: /api - for all endpoints<h4>
 
 ## Service `Auth`
 
@@ -21,13 +21,15 @@ HTTP Status 200
 
 JSON:
 
+```json
 {
     "id": `<number>`
 }
+```
 
 **Logout from service**
 
-GET /logout 
+<code style="color : green">GET</code> /logout 
 
 *headers*
 
@@ -37,7 +39,9 @@ Authorization Bearer <JWT Token>
 
 HTTP Status 200
 
-POST /signin Log-in
+**Log-in**
+
+<code style="color : olive">POST</code> /signin 
 
 *headers*
 
@@ -55,7 +59,9 @@ JSON:
     "createdAt": <Date ISO>
 }
 
-POST /signin/new_token Refresh JWT token
+**Refresh JWT token**
+
+<code style="color : olive">POST</code> /signin/new_token 
 
 *headers*
 
@@ -71,7 +77,9 @@ JSON:
     "createdAt": <Date ISO>
 }
 
-POST /signup Register a new account
+**Register a new account**
+
+<code style="color : olive">POST</code> /signup 
 
 *body*
 
@@ -85,15 +93,32 @@ as JSON:
 
 ## Service `File`
 
-Prefix: /file
+<h5>Prefix: /file<h5>
 
-GET /list Get info of all your files
+*headers for all `file` endpoints*
 
-GET /:id Get a file info by id
+Authorization Bearer <JWT Token>
+
+**Get info of all your files**
+
+<code style="color : green">GET</code> /list 
+
+*response*
+
+JSON: 
+
+{
+    "items"
+}
+
+
+**Get a file info by id**
+
+<code style="color : green">GET</code> /:id 
 
 *Path params*
 
-id 
+id
 
 /download/:id Download file by id
 
