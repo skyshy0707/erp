@@ -8,9 +8,7 @@ Prefix: /api - for all endpoints
 
 **Get the user id**
 
-```diff 
-+ GET
-``` /info 
+$${\color{green}GET}$$ /info 
 
 *headers*
 
