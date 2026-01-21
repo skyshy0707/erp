@@ -8,9 +8,9 @@ Prefix: /api - for all endpoints
 
 **Get the user id**
 
-```html
+
 <h6 color="green">GET</h6>
-``` 
+
 /info 
 
 *headers*
