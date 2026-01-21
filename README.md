@@ -10,7 +10,8 @@ Prefix: /api - for all endpoints
 
 ```html
 <span color="green">GET</span>
-``` /info 
+``` 
+/info 
 
 *headers*
 
