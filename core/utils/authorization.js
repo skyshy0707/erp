@@ -12,6 +12,8 @@ const serializers = require('../serialize/serializers')
 
 class Auth{
 
+    static instance
+
     alg = 'sha256'
     method = 'Token'
     saltLength = 128
@@ -124,7 +126,6 @@ class BasicAuth extends Auth{
                 return await dao.createUser(model)
             }
             catch (error){
-                console.log(`who instance ${Object.keys(error)}, name: ${error.name}, fields: ${error.fields}`)
                 if (error instanceof dao.UniqueConstraintError){
                     var fields = Object.keys(error.fields)
                     if (fields.includes('email') || fields.includes('phone')){
@@ -181,7 +182,7 @@ class BasicAuth extends Auth{
     async verify(authData){
         const [id, password] = this.decryptAuth(authData)
         const user = await dao.getUser(id)
-        
+
         try {
             assert.ok(user)
         }

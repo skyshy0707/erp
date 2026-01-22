@@ -1,3 +1,16 @@
+# ERP Service
+
+Service for storing and uploading files by users with registration and authorization based on
+REST API architecture. This is the server part.
+
+**Few specialities of this work:**
+
+My authorization middleware produce decrypted jwt bearer token for better protection. This is significant if
+the project stores jwt token in cookies.
+
+I use self-developed serializer[https://github.com/skyshy0707/erp/tree/master/core/serialize] which allow 
+to get objects for instancing db models and helps to avoid code repeating. And the main it's can work with
+`sequelize v.7` models based on `Model` class.
 
 
 # API
@@ -21,7 +34,7 @@ JSON:
 
 ```json
 {
-    "id": `<number>`
+    "id": <number>
 }
 ```
 
@@ -41,7 +54,10 @@ Response HTTP Status 200:
 
 *headers*:
 
-Authorization Basic <Base64 Encoded id:password>
+Authorization Basic <Base64 Encoded id:password>*
+
+* where `id` - this is one of the your credentials form { `email`, `phone` }.
+To sign in you could use `email` or `phone` encoded in `base64` code
 
 Response HTTP Status 201:
 

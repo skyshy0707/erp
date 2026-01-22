@@ -37,8 +37,6 @@ async function deleteFile(fileId, userId){
 }
 
 async function generateUserFileName(originalname, request){
-
-    
     const userId = request.userId
     const fileId = request.params?.id || null
     const url = request.url

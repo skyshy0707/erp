@@ -36,7 +36,6 @@ class Serializer{
 
     serialize(instance){
         const data = instance.dataValues ? instance.dataValues : instance
-
         var includes = new Set(this.scheme.include)
         var excludes = new Set(this.scheme.exclude)
         const allIncludes = includes.delete("@all")

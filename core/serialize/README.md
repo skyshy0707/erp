@@ -16,7 +16,12 @@ My serializer based on construction of two components:
 2) Sequelize model class. This is help to build the final result. As a source of defing field properties to
 make resulting object with fieldset which are defined by an user in scheme (1).
 
+## Dependencies
 
+Now it to use this serializer you should install `get-function-params` package or check it installing in
+`node_modules`. 
+
+At the currency
 
 ## Usage
 
@@ -24,7 +29,7 @@ make resulting object with fieldset which are defined by an user in scheme (1).
 
 #### Properties:
 
-* `excludes`, `includes` - that you want include and exclude respectively.
+* `excludes`, `includes` - that you want to include and exclude respectively.
 
 <br> You can specify entire group of fields as:
 
@@ -32,23 +37,23 @@ make resulting object with fieldset which are defined by an user in scheme (1).
 `@pk` <br> - will be primary keys
 `@virtual` <br> - will be fields of model with type `VIRTUAL`
 
-* `as` - an object structure, describing as value will be setted in result serialized object
+* `as` - an object structure, describing as a value will be setted in the result serialized object
 
 This is definitely mapping as set of fields which values are serialization rules in it and value 
 sources also.
 If you want to map your field name as an another name in your result object you should 
 specify this new name as a string. 
 
-Otherwise if you want to re-define your field value as computed field you should put in its value
+Otherwise if you want to re-define your field value as a computed field you should put in its value
 special structure:
 
 {
-    method?: <function>,
-    default?: <any>,
-    as?: <string>
+    method?: `<function>`,
+    default?: `<any>`,
+    as?: `<string>`
 }
 
-* `method` - a function with parameters or nullary. Here you should provide only such name of arguments which are exist in your serializer class properties. As a rule it is instance, because my serialzer doesn't support something else.
+* `method` - a function with parameters or nullary. Here, you should provide only such names of arguments which are exist in your serializer class properties. As a rule it is instance, because my serialzer doesn't support something else.
 * `default` - default value for your field, supports any type besides function.
 * `as` - if you want specify field name that's differ from instance.
 
@@ -56,22 +61,22 @@ special structure:
 Next property is only experemental:
 
 * `assoc` - an object structure for serialize a nested object or an array. Also it is a mapping object that describes
-how serialzie nested:
+how to serialize nested:
 
 {
-    how: <Serializer> | scheme<Object>,
-    scalar: <string>
+    how: `<Serializer> | scheme<Object>`,
+    scalar: `<string>`
 }
 
-* `how` You can provide serializer class to serialzie nested objects or specify a scheme which will be applied to
+* `how` You can provide serializer class to serialize nested objects or specify a scheme which will be applied to
 the same serializer class instance through `this`.
 
-* `scalar` If you just only get value from nested object by this specified field name.
+* `scalar` If you want to get just only value from nested object by this specified field name.
 
 ## Usage
 
 
-If you need to prepare model with required data to write it to the database
+If you need to prepare a structure with required data to write it to the database
 using sequelize model.
 
 Assume, you have your defined model `FileDescriptor`:
@@ -218,7 +223,7 @@ const FileUpload = {
 
 As you can see, you have to add some fieldset to exclude, define methods to
 compute extra fields (`extension`, `user_id`), and map fields to rename filename and
-mimetype for database insert transaction be correct.
+mimetype to make database insert transaction be correct.
 
 Now you can define serializer class singletone as:
 
@@ -234,7 +239,7 @@ module.exports = {
 }
 ```
 
-Now is the time to make our finite model for create operation:
+Now is the time to make our finite model:
 
 ```javascript
 const serializer = require('./serialize/serializers')
