@@ -262,11 +262,11 @@ JSON
 
 ## Possible HTTP Error Responses as JSON:
 
-**Bad data**
+### Bad data
 
 Status code: 400
 
-##### Endpoint list:
+#### Endpoint list:
 
 * Register a new account
 * Upload a new file
@@ -280,13 +280,13 @@ Status code: 400
 }
 ```
 
-**Auth data don't received**
+### Auth data don't received
 
 Occurs if you set anything in Authorization header
 
 Status code 401
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints, required authorization header
 
@@ -297,13 +297,13 @@ All protect endpoints, required authorization header
 }
 ```
 
-**Token expired**
+### Token expired
 
 Occurs when token was expired
 
 Status code 401
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -314,14 +314,14 @@ All protect endpoints which require JWT-authorization
 }
 ```
 
-**Token don't be found**
+### Token don't be found
 
 Occurs when token was retrieved but not found. Occurs rarely at this moment 
 between authorization processing and when user have been deleted 
 
 Status code 401
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -333,13 +333,13 @@ All protect endpoints which require JWT-authorization
 }
 ```
 
-**Token wasn't provided**
+### Token wasn't provided
 
 Occurs when token wasn't provided in Authorization header or invalid
 
 Status code 401
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -351,13 +351,13 @@ All protect endpoints which require JWT-authorization
 }
 ```
 
-**Unappropriate auth method**
+### Unappropriate auth method
 
 Occurs when auth method is not correct for the current endpoint
 
 Status code 401
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints, required authorization header
 
@@ -368,12 +368,12 @@ All protect endpoints, required authorization header
 }
 ```
 
-**Not enough rights**
+### Not enough rights
 
 Occurs when user refers to the endpoint that return resource
 which is own another user
 
-##### Endpoint list:
+#### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
