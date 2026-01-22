@@ -266,7 +266,7 @@ JSON
 
 Status code: 400
 
-#### Endpoint list:
+##### Endpoint list:
 
 * Register a new account
 * Upload a new file
@@ -286,7 +286,7 @@ Occurs if you set anything in Authorization header
 
 Status code 401
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints, required authorization header
 
@@ -303,7 +303,7 @@ Occurs when token was expired
 
 Status code 401
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -321,7 +321,7 @@ between authorization processing and when user have been deleted
 
 Status code 401
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -339,7 +339,7 @@ Occurs when token wasn't provided in Authorization header or invalid
 
 Status code 401
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
@@ -357,7 +357,7 @@ Occurs when auth method is not correct for the current endpoint
 
 Status code 401
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints, required authorization header
 
@@ -373,7 +373,7 @@ All protect endpoints, required authorization header
 Occurs when user refers to the endpoint that return resource
 which is own another user
 
-#### Endpoint list:
+##### Endpoint list:
 
 All protect endpoints which require JWT-authorization
 
