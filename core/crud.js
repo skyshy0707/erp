@@ -5,7 +5,8 @@ const dao = require('../db/dao')
 const fs = require('./middleware/filesystem')
 const serializer = require('./serialize/serializers')
 const { httpErrorResponse, paginateResponseData } = require('./serialize/schemes')
-const { reprState } = require('./errorState')
+const { reprState, statement } = require('./errorState')
+const fileOwnerShip = require('./utils/permission')
 
 
 async function signin(request, response){
@@ -43,15 +44,13 @@ async function signup(request, response){
 async function file(request, response){
     const userId = request.userId
     const fileId = request.params.id
-    const file = await dao.getFile(fileId, userId)
-
-    if (!file){
-        return httpErrorResponse(response, { 
-            statusCode: 404, 
-            message: 'File not found' 
-        })
+    let file
+    try{
+        file = await fileOwnerShip.isOwn(fileId, userId)
     }
-
+    catch (error){
+        return httpErrorResponse(response, error)
+    }
     return response.status(200).json({
         message: 'Success',
         result: serializer.FileResponseSerializer.serialize(file)
@@ -62,8 +61,6 @@ async function fileList(request, response){
     const userId = request.userId
     const pagination = paginateResponseData(request)
     const [files, total] = await dao.getFiles(userId, pagination)
-
-    console.log(`Type of files list: ${typeof(files)}`)
 
     return response.status(200).json({
         ...serializer.FileListSerializer.serialize(files),
@@ -78,9 +75,20 @@ async function fileDownload(request, response){
     const file = await dao.getFile(fileId, request.userId)
 
     if (file){
-        console.log(`PROCESSED`)
-        return response.status(200).download(path.resolve(config.FILE_UPLOAD_PATH, request.userId.toString()))
+        return response.status(200).download(
+            path.resolve(
+                config.FILE_UPLOAD_PATH, 
+                request.userId.toString(), 
+                file.name
+            )
+        )
     }   
+    return httpErrorResponse(
+        response, 
+        reprState.doesnt_exist(
+            `File with id=${fileId} doesn\'t exist or was deleted`
+        )  
+    )
 }
 
 async function fileDelete(request, response){
@@ -115,7 +123,7 @@ async function fileUpdate(request, response){
             file = await dao.createFileDescr(
                 serializer.FileUploadSerializer.serialize(request.file)
             )
-            created = true
+            created = file
         }
 
         if (created){
@@ -139,6 +147,9 @@ async function fileUpdate(request, response){
         if (error instanceof dao.UniqueConstraintError){
             return httpErrorResponse(response, reprState.conflict(error.message))
         }
+        else if(error instanceof dao.ValidationError){
+            return httpErrorResponse(response, reprState.bad_data(error.message))
+        }
         return httpErrorResponse(response, error)
     }
 }
@@ -154,6 +165,11 @@ async function fileUpload(request, response){
         })
     }
     catch (error) {
+        if (error instanceof dao.ValidationError){
+            return httpErrorResponse(
+                response, statement(reprState.bad_data(error.message))
+            )
+        }
         return httpErrorResponse(response, error)
     }
 }

@@ -1,5 +1,6 @@
 const path = require('node:path')
 const { reprState } = require('../errorState')
+const config = require('../../config')
 
 const BasicAuthResponse = {
     include: [
@@ -48,7 +49,8 @@ const FileUpload = {
         'originalname',
         'encoding',
         'destination',
-        'path'
+        'path',
+        "updatedAt"
     ],
 
     as: {
@@ -89,13 +91,18 @@ const httpErrorResponse = (response, error) => {
         }
     }
 
+    console.log(`error.message: ${error.message}`)
 
-    return response.status(statusCode).json(
-        {
-            message: (error.body ? error.body.message : error.message) || error,
-            detail: error.detail || statusCode == 500 ? error.stack : null
-        }
-    )
+    //console.log(`error.body.message: ${error.body.message}`)
+    console.log(`error.detail: ${error.detail}`)
+
+    const errorBody = {
+        message: error.message || error,
+        detail: error.detail || (statusCode == 500 && config.DEV_MODE ? error.stack : null)
+    }
+    console.log(`errorBody : ${Object.keys(errorBody)}, errorBody.message: ${Object.keys(errorBody.message)}`)
+
+    return response.status(statusCode).json(errorBody)
 }
 
 

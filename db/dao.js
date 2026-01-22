@@ -1,55 +1,40 @@
 const { Op } = require('@sequelize/core')
-
-
 const { 
     QueryTypes, 
     DatabaseError, 
     UniqueConstraintError, 
     BaseError,
-    SequelizeValidationError,
     ValidationError
-} = require('sequelize')
+} = require('@sequelize/core')
 
 const db = require('./models/index')
 
 async function createUser(data){
-    for (let key of Object.keys(data)){
-        console.log(`${key} = ${data[key]}, length: ${data[key].length}`)
-    }
     try {
         return await db.User.create(data)
     }
     catch (error){
-        console.log(`Error at create user: ${error.stack}`)
         if (error.name == 'SequelizeUniqueConstraintError'){
-            throw new UniqueConstraintError(error.message, [error])
+            throw new UniqueConstraintError(error)
         }
         throw new ValidationError(error.message, [error])
     }
-    
 }
 
 async function createJWTToken(data){
-
-
     try{
         return await db.JWTToken.create(data)
     }
     catch (error){
         if (error.name == 'SequelizeUniqueConstraintError'){
-            throw new UniqueConstraintError(error.message, [error])
+            throw new UniqueConstraintError(error)
         }
         throw new ValidationError(error.message, [error])
     }
-    
 }
 
 async function getUser(id){
 
-
-    /*return await db,sequelize.query(
-        `SELECT `
-    )*/
     return await db.User.findOne({
         where: {
             [Op.or]: {
@@ -70,27 +55,8 @@ async function getJWTToken(token){
             type: QueryTypes.SELECT
         }
     )
-
     return result[0]
-
-
-
-    /*return await db.Token.findOne({
-        include: { 
-            model: db.JWTToken, 
-            as: 'refreshToken', 
-            throwgh: { 
-                attributes: [
-                    'token'
-                ] 
-            } 
-        },
-        where: {
-            token: token
-        }
-    })*/
 }
-
 
 async function getOrCreateDevice(info, ip){
     return await db.Device.findOrCreate({
@@ -104,7 +70,6 @@ async function getOrCreateDevice(info, ip){
 async function getOrCreateUserAgent(deviceId, userId){
 
     const user = await getUser(userId)
-
     return await db.UserAgent.findOrCreate({
         where: {
             device_id: deviceId,
@@ -118,17 +83,6 @@ async function getUserAgentId(info, ip, userId){
     const [device,] = await getOrCreateDevice(info, ip)
     const [userAgent,] = await getOrCreateUserAgent(device.id, userId)
     const userAgentId = userAgent.id
-
-    /*await db.JWTToken.update({
-            expired: true
-        },
-        {
-            where: { 
-                user_agent_id: userAgentId,
-                expired: false
-            }
-        }
-    )*/
     return userAgentId
 }
 
@@ -144,21 +98,19 @@ async function expirePreviousTokens(tokenIds){
             }
         }
     )
-    /*db.JWTToken.update(
-        {
-            expired: true
-        },
-        {
-            where: {
-                token: [token.id, token.that_refreshes]
-            }
-        }
-    )*/
 }
  
-
 async function createFileDescr(model){
-    return await db.FileDescriptor.create(model)
+
+    try{
+        return await db.FileDescriptor.create(model)
+    }
+    catch (error){
+        if (error.name == 'SequelizeValidationError'){
+            throw new ValidationError(error.message, [error])
+        }
+        throw new DatabaseError(error)
+    }
 }
 
 async function getFile(id, userId, byId=false){
@@ -178,12 +130,8 @@ async function getFile(id, userId, byId=false){
         })
     }
     catch (error){
-        console.log(`error name : ${error.name}`)
-        if (error.name == 'SequelizeBaseError'){
-            throw BaseError(error.message, [error])
-        }
+        throw BaseError(error.message, error)
     }
-    
 }
 
 async function deleteFile(id, userId){
@@ -207,7 +155,6 @@ async function getFiles(userId, pagination){
     return [rows, count]
 }
 
-
 async function updateFileDescr(model, fileId, userId){
     var [instance] = await db.FileDescriptor.update(
         model,
@@ -218,14 +165,9 @@ async function updateFileDescr(model, fileId, userId){
             }
         }
     )
-
-    console.log(`Instnace keys: ${Object.keys(instance)}, ${instance}`)
     if (!Object.keys(instance)){
-
-
         instance = null
     }
-
     return instance
 }
 
@@ -247,6 +189,5 @@ module.exports  = {
     DatabaseError,
     UniqueConstraintError,
     BaseError, 
-    SequelizeValidationError,
     ValidationError
 }

@@ -2,25 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
-//const {  } = require('sequelize');
 const { Sequelize, DataTypes, Deferrable, Model } = require('@sequelize/core')
 const { MySqlDialect } = require('@sequelize/mysql')
+
 const basename = path.basename(__filename);
 const config = require('../../config');
 const db = {};
 
-
-/*const sequelize = new Sequelize(
-  config.MYSQL_DATABASE, 
-  config.MYSQL_USER, 
-  null,
-  {
-    dialect: 'mysql',
-    host: config.MYSQL_ROOT_HOST,
-    port: 3306
-  }
-)
-*/
 
 const sequelize = new Sequelize(
   {
@@ -32,15 +20,6 @@ const sequelize = new Sequelize(
     port: config.MYSQL_PORT
   }
 )
-
-
-/*
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}*/
 
 fs
   .readdirSync(__dirname)
@@ -99,11 +78,17 @@ User.init(
             type: DataTypes.STRING(285),
             allowNull: false,
             unique: true,
+            validate: {
+              is: /^\S+@\S+\.\S+$/
+            }
     },
     phone: {
             type: DataTypes.STRING(13),
             allowNull: false,
             unique: true,
+            validate: {
+              is: /^\+\d{2,13}$/
+            }
     },
     password: {
             type: DataTypes.STRING(512),
@@ -232,11 +217,6 @@ JWTToken.belongsTo(JWTToken, {
   as: 'refreshToken'
 })
 
-/*JWTToken.hasOne(JWTToken, {
-  foreignKey: 'that_refreshes', sourceKey: 'token',
-  as: 'refreshToken'
-})*/
-
 UserAgent.hasMany(JWTToken, {
   foreignKey: 'user_agent_id', sourceKey: 'id'
 })
@@ -262,7 +242,10 @@ FileDescriptor.init({
       },
       mime_type: {
             type: DataTypes.STRING(76),
-            allowNull: false
+            allowNull: false,
+            validate: {
+              is: /^\S+\/\S+$/
+            }
       },
       size: {
             type: DataTypes.BIGINT,

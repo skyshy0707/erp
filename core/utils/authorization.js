@@ -4,12 +4,10 @@ const crypto = require('node:crypto')
 const jwt = require('jsonwebtoken')
 const requestIp = require('request-ip')
 
-
 const config = require('../../config')
-const { reprState, statement } = require('../errorState')
 const dao = require('../../db/dao')
+const { reprState, statement } = require('../errorState')
 const serializers = require('../serialize/serializers')
-
 
 
 class Auth{
@@ -24,13 +22,11 @@ class Auth{
     }
 
     decryptAuth(authStr){
-        console.log(`auth str: ${authStr}`)
         if (typeof(authStr) != 'string'){
             throw statement(
                 reprState.token_not_provided
             )
         }
-        console.log('Type authstr is correct')
         let [method, token] = authStr.split(' ')
 
         if (!method.startsWith(this.method)){
@@ -47,17 +43,7 @@ class Auth{
 
     generateSalt(){ 
         return crypto.randomBytes(this.saltLength).toString('hex')
-        //return crypto.createHash(this.alg).digest('hex')
     }
-
-    /*generate(){
-        const fieldset = this.credentialCategories.generate
-        var fields = {}
-        for (let fieldName of fieldset){
-            fields[fieldName] = this['generate' + this.getSuffix(fieldName)]()
-        }
-        return fields
-    }*/
 
     decodeBase64(value){
         return Base64.decode(value)
@@ -82,11 +68,11 @@ class Auth{
 
                 fields[fieldName] = fieldValue
 
-                var decrypting = this.credentialCategories.decode
+                var decoding = this.credentialCategories.decode
 
-                for (let decryptMethod of Object.keys(this.credentialCategories.decode)){
-                    var method = this['decode' + this.getSuffix(decryptMethod)]
-                    if (decrypting[decryptMethod].includes(fieldName)) {
+                for (let decodeMethod of Object.keys(decoding)){
+                    var method = this['decode' + this.getSuffix(decodeMethod)]
+                    if (decoding[decodeMethod].includes(fieldName)) {
                         fields[fieldName] = method(fieldValue)
                     }
                 } 
@@ -138,14 +124,22 @@ class BasicAuth extends Auth{
                 return await dao.createUser(model)
             }
             catch (error){
+                console.log(`who instance ${Object.keys(error)}, name: ${error.name}, fields: ${error.fields}`)
                 if (error instanceof dao.UniqueConstraintError){
+                    var fields = Object.keys(error.fields)
+                    if (fields.includes('email') || fields.includes('phone')){
+                        throw statement(
+                            reprState.conflict, 
+                            'User exist already with this credentials'
+                        )
+                    }
                     continue
                 }
                 if (
                     error instanceof dao.DatabaseError || 
                     error instanceof dao.ValidationError
                 ){ 
-                    throw statement(reprState.bad_data, error.stack)
+                    throw statement(reprState.bad_data, error.message)
                 }
                 else {
                     break
@@ -184,16 +178,10 @@ class BasicAuth extends Auth{
         )
     }
 
-    
-
     async verify(authData){
         const [id, password] = this.decryptAuth(authData)
-
-        console.log(`User with key=${id}, password=${password}`)
         const user = await dao.getUser(id)
-        console.log(`User inst: ${user.dataValues.id}`)
-
-
+        
         try {
             assert.ok(user)
         }
@@ -201,7 +189,7 @@ class BasicAuth extends Auth{
             throw statement(reprState.user_not_found)
         }
         try {
-            assert.equal(await this.encrypt(id, password, user.salt), user.password)
+            assert.equal(await this.encrypt(user.email, password, user.salt), user.password)
         }
         catch (error) { 
             throw statement(reprState.wrong_credentials)
@@ -217,15 +205,11 @@ class JWTAuth extends Auth{
 
     async decryptAuth(authStr){ 
         authStr = super.decryptAuth(authStr)
-
-        console.log(`SK - ${config.SECRET_KEY}`)
         const token = await this.verify(authStr, salt=config.SECRET_KEY)
-
-        console.log(`Token was verifield successfully`)
         return token
     }
 
-    //`encrypted` must be [id, password] as Array or 
+    //`encrypting` must be [id, password] as Array or 
     // encrypted jwt token as string:
     encrypt(encrypting, salt=''){
 
@@ -234,7 +218,6 @@ class JWTAuth extends Auth{
 
     async expirePreviousTokenIds(tokenIds, decrypt=false, findRelated=false){
         const related = []
-        console.log(`token provided: ${tokenIds[0]}`)
         if (decrypt){
             tokenIds = await Promise.all(tokenIds.map(async (token) => { return await this.decryptAuth(token) }))
         }
@@ -259,15 +242,6 @@ class JWTAuth extends Auth{
             jwtToken = await dao.getJWTToken(token)
             salt = jwtToken.salt
         }
-        if (salt){
-            console.log(`authstr: ${authStr} SALT: ${salt}`)
-        }
-        console.log(`SALT: ${salt}, TOKEN: ${token}`)
-
-        if (jwtToken){
-            console.log(`JWT TOKEN ATTRS ${Object.keys(jwtToken)}`)
-        }
-        else console.log(`JWT TOKEN IS ${typeof(jwtToken)}`)
         
         try{
             
@@ -292,10 +266,10 @@ class JWTAuth extends Auth{
                 throw statement(reprState.token_expired)
             }
 
-            console.log(`Created at ${jwtToken.createdAt}, type - ${typeof(jwtToken.createdAt)}`)
-
-            if (new Date(jwtToken.createdAt).valueOf() + config.JWT_TOKEN_EXPIRES_IN < Date.now() && jwtToken.refreshToken) { 
-                console.log(`Token was expired`)
+            if (
+                new Date(jwtToken.createdAt).valueOf() + config.JWT_TOKEN_EXPIRES_IN < Date.now() 
+                && jwtToken.refreshToken
+            ) { 
                 throw statement(reprState.token_expired)
             }
             
@@ -305,7 +279,6 @@ class JWTAuth extends Auth{
                     jwtToken.that_refreshes
                 ])
             }
-            console.log(`Token was verified suceessfully`)
         }
         if (jwtToken && jwtToken.that_refreshes){
             verified.refresh = true
@@ -334,7 +307,6 @@ class JWTAuth extends Auth{
                 if (error instanceof dao.UniqueConstraintError){
                     continue
                 }
-                console.log(`Error while token create - ${error.stack}`)
                 break
             }
         }
@@ -342,8 +314,6 @@ class JWTAuth extends Auth{
 
     async recordCredentials(request){
         var model = super.recordCredentials(request)
-
-        console.log(`User id: ${request.userId}`)
         const userId = this.decodeBase64(request.userId)
         const ip = requestIp.getClientIp(request)
         const info = request.headers['user-agent']

@@ -8,19 +8,15 @@ const crud = require('./crud')
 const { 
   basicAuth, 
   bearerAuth, 
-  //bearerAuthRefreshToken 
 } = require('./middleware/authorization')
 const { uploadStorage } = require('./middleware/filesystem')
 const handle = require('./middleware/handlers')
 
-
 const app = express()
-
 const authentification = express.Router()
 const service = express.Router()
 
-
-const corsOptions = {
+const corsOptions = { 
   origin: [
     "*"
   ],
@@ -44,11 +40,7 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions))
-//app.use(uploadStorage)
-//app.use(express.json())
-//app.use(handle.handler405Error)
-
-
+app.use(express.json())
 authentification.get('/info', bearerAuth, (request, response) => {
   return crud.info(request, response)
 })
@@ -66,45 +58,38 @@ authentification.post('/signin/new_token', bearerAuth, async (request, response)
 })
 
 authentification.post('/signup', async (request, response) => {
-
   return await crud.signup(request, response)
 })
 
-service.get('/list', bearerAuth, async (request, response) => {
+service.get('/list', async (request, response) => {
   return await crud.fileList(request, response)
 })
 
-service.get('/:id', bearerAuth, async (request, response) => {
+service.get('/:id', async (request, response) => {
   return await crud.file(request, response)
 })
 
-service.get('/download/:id', bearerAuth, async (request, response) => {
+service.get('/download/:id', async (request, response) => {
   return await crud.fileDownload(request, response)
 })
 
-service.delete('/delete/:id', bearerAuth, async (request, response, next) => {
+service.delete('/delete/:id', async (request, response, next) => {
   return await crud.fileDelete(request, response)
 })
 
-service.post('/upload', bearerAuth, uploadStorage, async (request, response, next) => {
+service.post('/upload', uploadStorage, async (request, response, next) => {
   console.log(`contenttype: ${request.headers['content-type']}`)
   return await crud.fileUpload(request, response)
 }, handle.errorHandler)
 
-service.put('/update/:id', bearerAuth, uploadStorage, async (request, response, next) => {
+service.put('/update/:id', uploadStorage, async (request, response, next) => {
   return await crud.fileUpdate(request, response)
 }, handle.errorHandler)
 
 
-
-
 app.use("/api", authentification)
+app.use(bearerAuth)
 app.use("/api/file", service)
-
-app.all(/^\//, (request, response, next) => {
-  response.status(405).send('Method not allowed')
-})
-
 
 
 app.listen(8000, () => {
