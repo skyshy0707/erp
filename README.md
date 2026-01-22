@@ -280,8 +280,111 @@ Status code: 400
 }
 ```
 
+**Auth data don't received**
+
+Occurs if you set anything in Authorization header
+
+Status code 401
+
+### Endpoint list:
+
+All protect endpoints, required authorization header
+
+```json
+{
+    "message": "Auth data don\'t received",
+    "detail": null
+}
+```
+
+**Token expired**
+
+Occurs when token was expired
+
+Status code 401
+
+### Endpoint list:
+
+All protect endpoints which require JWT-authorization
 
 
+
+```json
+{
+    "message": "Token expired",
+    "detail": null
+}
+```
+
+**Token don't be found**
+
+Occurs when token was retrieved but not found. Occurs rarely at this moment 
+between authorization processing and when user have been deleted 
+
+Status code 401
+
+### Endpoint list:
+
+All protect endpoints which require JWT-authorization
+
+
+```json
+{
+    "message": "Token wasn't found",
+    "detail": null
+}
+```
+
+**Token wasn't provided**
+
+Occurs when token wasn't provided in Authorization header or invalid
+
+Status code 401
+
+### Endpoint list:
+
+All protect endpoints which require JWT-authorization
+
+
+```json
+{
+    "message": "Token wasn't provided or invalid",
+    "detail": null
+}
+```
+
+**Unappropriate auth method**
+
+Occurs when auth method is not correct for the current endpoint
+
+Status code 401
+
+### Endpoint list:
+
+All protect endpoints, required authorization header
+
+```json
+{ 
+    "message": "Inappropriate auth method used",
+    "detail": null
+}
+```
+
+**Not enough rights**
+
+Occurs when user refers to the endpoint that return resource
+which is own another user
+
+### Endpoint list:
+
+All protect endpoints which require JWT-authorization
+
+```json
+{
+    "message": "Not enought rights",
+    "detail": null
+}
+```
 
 ### Get a file info by id
 
@@ -293,7 +396,7 @@ Status code: 404
 
 ```json
 {
-    "message": "Resource doesn\'t exist",
+    "message": "Resource doesn't exist",
     "detail": "Requested file with id=<number> doesn't exist anymore"
 }
 ```
@@ -308,7 +411,7 @@ Status code: 401
 
 ```json
 {
-    "message": "User wasn\'t found",
+    "message": "User wasn't found",
     "detail": null
 }
 ```
@@ -369,11 +472,11 @@ Staus code 409
 
 ### Get a file info by id
 
-You try to access not your owned  file
+**Not enought rights**
+
+Occurs when you try to access not your owned  file
 
 Status code 403
-
-**Not enought rights**
 
 ```json
 {
@@ -393,11 +496,46 @@ Status code 404
 }
 ```
 
+### Download file by id
+
+**Doesn't exist**
+
+Status code 404
+
+Occurs if file doesn't exist or was deleted.
+This response returns also if you try to download not your own file
+
+```json
+{
+    "message": "Resource doesn\'t exist",
+    "detail": "File with id=<number> doesn\'t exist or was deleted"
+}
+```
+
+
+Html only returns when file metadata was retrived, 
+but file could be blocked or deleted by superuser
+
+OR html only:
+
+```html
+
+<head>
+    <meta charset="utf-8">
+    <title>Error</title>
+</head>
+
+<body>
+    <pre>Cannot GET /api/file/download/<number></pre>
+</body>
+```
+
+
 ### Delete the file
 
 **Fail to delete**
 
-Occur if file is blocked by superuser and/or have highest access level.
+Occurs if file is blocked by superuser and/or have highest access level
 
 Status code: 400
 
@@ -423,98 +561,30 @@ Status code: 404
 
 ### Upload a new file
 
+**Bad data**
 
+Usually occurs if you upload file with too long name which is unsupported by server
 
+Status code: 400
 
+```json
+{
+    "message": "Bad data",
+    "detail": "Validation Error: Validation is on name failed"
+}
+```
 
-    fail_to_upload: (detail=null) => { return {
-        code: 400, 
-        body: { 
-            message: 'Fail to upload',
-            detail: detail
-        }
-    }},
-    auth_data_dont_received: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Auth data don\'t received',
-            detail: detail
-        }
-    }},
-    token_expired: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Token expired',
-            detail: detail
-        }
-    }},
-    token_invalid: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Token invalid',
-            detail: detail
-        }
-    }},
-    token_not_found: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Token wasn\'t found',
-            detail: detail
-        }
-    }},
-    token_not_provided: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Token wasn\'t provided or invalid',
-            detail: detail
-        }
-    }},
-    unappropriate_method_auth: (detail=null) => { return {
-        code: 401, 
-        body: { 
-            message: 'Inappropriate auth method used',
-            detail: detail
-        }
-    }},
-    user_not_found: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'User wasn\'t found',
-            detail: detail
-        }
-    }},
-    unsupported_token: (detail=null) => { return {
-        code: 401, 
-        body: {
-            message: 'Unsupported token',
-            detail: detail
-        }
-    }},
-    not_enough_rights: (detail=null) => { return {
-        code: 403, 
-        body: {
-            message: 'Not enought rights',
-            detail: detail
-        }
-    }},
-    wrong_credentials: (detail=null) => { return {
-        code: 403, 
-        body: {
-            message: 'Wrong credentials',
-            detail: detail
-        }
-    }},
-    doesnt_exist: (detail=null) => { return {
-        code: 404, 
-        body: {
-            message: 'Resource doesn\'t exist',
-            detail: detail
-        }
-    }},
-    conflict: (detail=null) => { return {
-        code: 409, 
-        body: {
-            message: 'Resource is exist. Conflict. Try with another id',
-            detail: detail
-        }
-    }
+### Update the file or create a new file
+
+**Bad data**
+
+Usually occurs if you upload file with too long name which is unsupported by server
+
+Status code: 400
+
+```json
+{
+    "message": "Bad data",
+    "detail": "Validation Error: Validation is on name failed"
+}
+```
