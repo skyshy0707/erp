@@ -373,6 +373,8 @@ All protect endpoints, required authorization header
 Occurs when user refers to the endpoint that return resource
 which is own another user
 
+Status code 403
+
 #### Endpoint list:
 
 All protect endpoints which require JWT-authorization
@@ -383,6 +385,8 @@ All protect endpoints which require JWT-authorization
     "detail": null
 }
 ```
+
+## Endpoints with specific error representational status
 
 ### Get a file info by id
 
