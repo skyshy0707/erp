@@ -24,9 +24,11 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 <code style="color : green">GET</code> /info 
 
+Request
+
 headers:
 
-&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 Response HTTP Status 200:
 
@@ -42,19 +44,23 @@ JSON:
 
 <code style="color : green">GET</code> /logout 
 
+Request
+
 headers:
 
-&nbsp;&nbsp;Authorization Bearer `<JWT Token>`
+&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
 
-Response HTTP Status 200:
+Response HTTP Status 200
 
 **Log-in**
 
 <code style="color : olive">POST</code> /signin 
 
+Request
+
 headers:
 
-&nbsp;&nbsp;Authorization Basic `<Base64 Encoded id:password>`*
+&nbsp;&nbsp;Authorization: Basic `<Base64 Encoded id:password>`*
 
 &nbsp;&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
 To signin you could use `email` or `phone` encoded in `base64` code
@@ -75,9 +81,11 @@ JSON:
 
 <code style="color : olive">POST</code> /signin/new_token 
 
-***headers***:
+Request
 
-&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
+headers:
+
+&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 Response HTTP Status 201:
 
@@ -97,7 +105,7 @@ JSON:
 
 Request
 
-***body***:
+body:
 
 &nbsp;&nbsp;as JSON: 
 
@@ -125,7 +133,7 @@ JSON
 
 ***headers for all `file` endpoints***:
 
-&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 ### File endpoinsts:
 
@@ -164,7 +172,7 @@ JSON:
 
 Request
 
-***Path params***:
+Path params:
 
 &nbsp;&nbsp;id: `<number>`
 
@@ -191,7 +199,7 @@ JSON
 
 Request
 
-***Path params***:
+Path params:
 
 &nbsp;&nbsp;id: `<number>`
 
@@ -220,7 +228,7 @@ JSON
 
 Request
 
-***body***:
+body:
 
 &nbsp;&nbsp;body.file: Buffer
 
@@ -251,7 +259,7 @@ JSON
 
 Request
 
-***body***:
+body:
 
 &nbsp;&nbsp;body.file: Buffer
 
