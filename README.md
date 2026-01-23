@@ -26,7 +26,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 ```Request```
 
-headers:
+###### headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
@@ -46,7 +46,7 @@ JSON:
 
 ```Request```
 
-headers:
+###### headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
 
@@ -58,7 +58,7 @@ headers:
 
 ```Request```
 
-headers:
+###### headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: Basic `<Base64 Encoded id:password>`*
 
@@ -83,7 +83,7 @@ JSON:
 
 ```Request```
 
-headers:
+###### headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
@@ -105,7 +105,7 @@ JSON:
 
 ```Request```
 
-body:
+###### body:
 
 &nbsp;&nbsp;&nbsp;as JSON: 
 
@@ -172,7 +172,7 @@ JSON:
 
 ```Request```
 
-Path params:
+###### Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
@@ -199,7 +199,7 @@ JSON
 
 ```Request```
 
-Path params:
+###### Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
