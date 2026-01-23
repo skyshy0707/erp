@@ -24,13 +24,13 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 <code style="color : green">GET</code> /info 
 
-Request
+```Request```
 
 headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
-Response HTTP Status 200:
+```Response``` HTTP Status 200:
 
 JSON:
 
@@ -44,19 +44,19 @@ JSON:
 
 <code style="color : green">GET</code> /logout 
 
-Request
+```Request```
 
 headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
 
-Response HTTP Status 200
+```Response``` HTTP Status 200
 
 **Log-in**
 
 <code style="color : olive">POST</code> /signin 
 
-Request
+```Request```
 
 headers:
 
@@ -65,7 +65,7 @@ headers:
 &nbsp;&nbsp;&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
 To signin you could use `email` or `phone` encoded in `base64` code
 
-Response HTTP Status 201:
+```Response``` HTTP Status 201:
 
 JSON: 
 
@@ -81,13 +81,13 @@ JSON:
 
 <code style="color : olive">POST</code> /signin/new_token 
 
-Request
+```Request```
 
 headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
-Response HTTP Status 201:
+```Response``` HTTP Status 201:
 
 JSON: 
 
@@ -103,7 +103,7 @@ JSON:
 
 <code style="color : olive">POST</code> /signup 
 
-Request
+```Request```
 
 body:
 
@@ -117,7 +117,7 @@ body:
 }
 ```
 
-Response HTTP Status 201:
+```Response``` HTTP Status 201:
 
 JSON 
 
@@ -141,7 +141,7 @@ headers for all `file` endpoints:
 
 <code style="color : green">GET</code> /list 
 
-Response HTTP Status 200:
+```Response``` HTTP Status 200:
 
 JSON: 
 
@@ -170,13 +170,13 @@ JSON:
 
 <code style="color : green">GET</code> /:id 
 
-Request
+```Request```
 
 Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
-Response HTTP Status 200:
+```Response``` HTTP Status 200:
 
 JSON
 
@@ -197,13 +197,13 @@ JSON
 
 <code style="color : green">GET</code> /download/:id 
 
-Request
+```Request```
 
 Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
-Response HTTP Status 200
+```Response``` HTTP Status 200
 
 ![file](https://img.icons8.com/?size=100&id=11651&format=png&color=000000)
 
@@ -211,13 +211,13 @@ Response HTTP Status 200
 
 <code style="color : purple">DELETE</code> /delete/:id
 
-Request
+```Request``
 
 Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
-Response HTTP Status 200:
+```Response``` HTTP Status 200:
 
 JSON
 
@@ -234,13 +234,13 @@ JSON
 
 <code style="color : olive">POST</code> /upload 
 
-Request
+```Request```
 
 body:
 
 &nbsp;&nbsp;&nbsp;body.file: Buffer
 
-Response HTTP Status 201:
+```Response``` HTTP Status 201:
 
 JSON 
 
@@ -265,13 +265,13 @@ JSON
 
 <code style="color : blue">PUT</code> /update/:id 
 
-Request
+```Request```
 
 body:
 
 &nbsp;&nbsp;body.file: Buffer
 
-Response HTTP Status 200 (if file exist):
+```Response``` HTTP Status 200 (if file exist):
 
 JSON
 
@@ -282,7 +282,7 @@ JSON
 ```
 
 
-Response HTTP Status 201 (if file not exist):
+```Response``` HTTP Status 201 (if file not exist):
 
 JSON
 
