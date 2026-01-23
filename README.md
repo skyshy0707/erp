@@ -28,7 +28,7 @@ Request
 
 headers:
 
-&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
+&nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 Response HTTP Status 200:
 
@@ -48,7 +48,7 @@ Request
 
 headers:
 
-&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
+&nbsp;&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
 
 Response HTTP Status 200
 
@@ -60,9 +60,9 @@ Request
 
 headers:
 
-&nbsp;&nbsp;Authorization: Basic `<Base64 Encoded id:password>`*
+&nbsp;&nbsp;&nbsp;Authorization: Basic `<Base64 Encoded id:password>`*
 
-&nbsp;&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
+&nbsp;&nbsp;&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
 To signin you could use `email` or `phone` encoded in `base64` code
 
 Response HTTP Status 201:
@@ -85,7 +85,7 @@ Request
 
 headers:
 
-&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
+&nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 Response HTTP Status 201:
 
@@ -107,7 +107,7 @@ Request
 
 body:
 
-&nbsp;&nbsp;as JSON: 
+&nbsp;&nbsp;&nbsp;as JSON: 
 
 ```json
 {
@@ -131,9 +131,9 @@ JSON
 
 <h4>Prefix: /file<h4>
 
-***headers for all `file` endpoints***:
+headers for all `file` endpoints:
 
-&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
+&nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
 ### File endpoinsts:
 
@@ -174,7 +174,7 @@ Request
 
 Path params:
 
-&nbsp;&nbsp;id: `<number>`
+&nbsp;&nbsp;&nbsp;id: `<number>`
 
 Response HTTP Status 200:
 
@@ -201,13 +201,19 @@ Request
 
 Path params:
 
-&nbsp;&nbsp;id: `<number>`
+&nbsp;&nbsp;&nbsp;id: `<number>`
 
 Response HTTP Status 200
 
 **Delete the file**
 
 <code style="color : purple">DELETE</code> /delete/:id
+
+Request
+
+Path params:
+
+&nbsp;&nbsp;&nbsp;id: `<number>`
 
 Response HTTP Status 200:
 
@@ -230,7 +236,7 @@ Request
 
 body:
 
-&nbsp;&nbsp;body.file: Buffer
+&nbsp;&nbsp;&nbsp;body.file: Buffer
 
 Response HTTP Status 201:
 
