@@ -1,10 +1,7 @@
 const cors = require('cors')
 const express = require('express')
 
-
-
 const crud = require('./crud')
-
 const { 
   basicAuth, 
   bearerAuth, 
@@ -38,9 +35,9 @@ const corsOptions = {
   ]
 }
 
-
 app.use(cors(corsOptions))
 app.use(express.json())
+
 authentification.get('/info', bearerAuth, (request, response) => {
   return crud.info(request, response)
 })

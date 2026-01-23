@@ -1,3 +1,9 @@
+/*
+Module is designed to check user object (file) ownership
+and throwing enought exceptions for processing appropriate 
+http response
+*/
+
 const dao = require('../../db/dao')
 const { reprState, statement } = require('../errorState')
 

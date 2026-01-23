@@ -1,7 +1,5 @@
 const { HttpError } = require('http-json-errors')
 
-//const { response } = require('express')
-
 const reprState = {
     bad_data: (detail=null) => { return {
         code: 400, 

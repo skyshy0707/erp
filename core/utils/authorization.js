@@ -1,3 +1,11 @@
+/*
+Module including authorization classes `BasicAuth` and `JWTAuth` 
+that provides enought functionality to encode credentials, 
+create authorization data, and save it to database.
+
+These classes are used in authorization middleware in this project
+*/
+
 const assert = require('node:assert/strict')
 const { Base64 } = require("js-base64")
 const crypto = require('node:crypto')
@@ -67,9 +75,7 @@ class Auth{
             let fieldValue = source[fieldName]
 
             if (fieldValue){
-
                 fields[fieldName] = fieldValue
-
                 var decoding = this.credentialCategories.decode
 
                 for (let decodeMethod of Object.keys(decoding)){
@@ -103,7 +109,6 @@ class BasicAuth extends Auth{
 
 
     decryptAuth(authStr){
-
         authStr = super.decryptAuth(authStr)
         const [id, password] = authStr.split(":").map(factor => Base64.decode(factor))
 

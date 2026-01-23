@@ -5,8 +5,8 @@ REST API architecture. This is the server part.
 
 **Few specialities of this work:**
 
-My authorization middleware produce decrypted jwt bearer token for better protection. This is significant if
-the project stores jwt token in cookies.
+My authorization middleware produce extra-encrypted jwt bearer tokens for more high protection. This is significant if
+ project uses cookies for storing user jwt token.
 
 I use self-developed serializer[https://github.com/skyshy0707/erp/tree/master/core/serialize] which allow 
 to get objects for instancing db models and helps to avoid code repeating. And the main it's can work with
@@ -26,7 +26,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 *headers*:
 
-Authorization Bearer `<JWT Token>`
+Authorization `Bearer <JWT Token>`
 
 Response HTTP Status 200:
 
@@ -44,7 +44,7 @@ JSON:
 
 *headers*:
 
-Authorization Bearer <JWT Token>
+&nbsp;Authorization `Bearer <JWT Token>`
 
 Response HTTP Status 200:
 
@@ -54,10 +54,10 @@ Response HTTP Status 200:
 
 *headers*:
 
-Authorization Basic <Base64 Encoded id:password>*
+&nbsp;Authorization Basic <Base64 Encoded id:password>*
 
-* where `id` - this is one of the your credentials form { `email`, `phone` }.
-To sign in you could use `email` or `phone` encoded in `base64` code
+&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
+To signin you could use `email` or `phone` encoded in `base64` code
 
 Response HTTP Status 201:
 
@@ -77,7 +77,7 @@ JSON:
 
 *headers*:
 
-Authorization Bearer <JWT Token>
+&nbsp;Authorization `Bearer <JWT Token>`
 
 Response HTTP Status 201:
 
@@ -99,7 +99,7 @@ Request
 
 *body*:
 
-as JSON: 
+&nbsp;as JSON: 
 
 ```json
 {
@@ -125,7 +125,7 @@ JSON
 
 *headers for all `file` endpoints*:
 
-`Authorization Bearer <JWT Token>`
+&nbsp;Authorization `Bearer <JWT Token>`
 
 ### File endpoinsts:
 
@@ -166,7 +166,7 @@ Request
 
 *Path params*:
 
-id: `<number>`
+&nbsp;id: `<number>`
 
 Response HTTP Status 200:
 
@@ -193,7 +193,7 @@ Request
 
 *Path params*:
 
-id: `<number>`
+&nbsp;id: `<number>`
 
 Response HTTP Status 200
 
@@ -222,7 +222,7 @@ Request
 
 *body*:
 
-body.file: Buffer
+&nbsp;body.file: Buffer
 
 Response HTTP Status 201:
 
@@ -245,7 +245,7 @@ JSON
 }
 ```
 
-**Update the file or create a new file (if such file with this `id` is not exist)**
+**Update the file or create a new file (if file with this `id` is not exist)**
 
 <code style="color : blue">PUT</code> /update/:id 
 
@@ -253,7 +253,7 @@ Request
 
 *body*:
 
-body.file: Buffer
+&nbsp;body.file: Buffer
 
 Response HTTP Status 200 (if file exist):
 
@@ -276,7 +276,7 @@ JSON
 }
 ```
 
-## Possible HTTP Error Responses as JSON:
+## Others possible HTTP Error Responses as JSON:
 
 ### Bad data
 
@@ -605,4 +605,10 @@ Status code: 400
     "message": "Bad data",
     "detail": "Validation Error: Validation is on name failed"
 }
+```
+
+## How to build
+
+```bash
+docker compose up -d --build
 ```
