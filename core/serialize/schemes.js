@@ -1,5 +1,4 @@
 const path = require('node:path')
-const { reprState } = require('../errorState')
 const config = require('../../config')
 
 const BasicAuthResponse = {
@@ -9,32 +8,6 @@ const BasicAuthResponse = {
     exclude: [
         "password", "salt", "email", "phone", "updatedAt", "createdAt"
     ]
-}
-
-const TokenResponse = {
-    include: [
-        "@all", 'refreshToken'
-    ],
-    exclude: [
-        "@pk"
-    ],
-
-    as: {
-
-        salt: 'salted',
-        created: {
-            method: (instance) => instance.property,
-            default: null
-        }
-    },
-
-    assoc: {
-        field: {
-            
-            how: "<SERIALIZER> | scheme as Object",
-            scalar: "field"
-        }
-    }
 }
 
 const FileResponse = {
@@ -91,17 +64,10 @@ const httpErrorResponse = (response, error) => {
         }
     }
 
-    console.log(`error.message: ${error.message}`)
-
-    //console.log(`error.body.message: ${error.body.message}`)
-    console.log(`error.detail: ${error.detail}`)
-
     const errorBody = {
         message: error.message || error,
         detail: error.detail || (statusCode == 500 && config.DEV_MODE ? error.stack : null)
     }
-    console.log(`errorBody : ${Object.keys(errorBody)}, errorBody.message: ${Object.keys(errorBody.message)}`)
-
     return response.status(statusCode).json(errorBody)
 }
 
@@ -111,7 +77,6 @@ module.exports = {
     FileUpdate,
     FileUpload,
     BasicAuthResponse,
-    TokenResponse,
     httpErrorResponse,
     paginateResponseData
 }

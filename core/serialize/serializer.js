@@ -21,10 +21,6 @@ class ListSerializer{
 
 class Serializer{
 
-    reservedWords = [
-        "@all", "@pk"
-    ]
-
     reservedParams = [
         'instance', 'model'
     ]
