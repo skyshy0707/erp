@@ -5,7 +5,7 @@ REST API architecture. This is the server part.
 
 **Few specialities of this work:**
 
-My authorization middleware produce extra-encrypted jwt bearer tokens for more high protection. This is significant if
+My authorization middleware produces extra-encrypted jwt bearer tokens for more high protection. This is significant if
  project uses cookies for storing user jwt token.
 
 I use self-developed serializer[https://github.com/skyshy0707/erp/tree/master/core/serialize] which allow 
