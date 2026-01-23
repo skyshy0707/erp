@@ -26,7 +26,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 *headers*:
 
-Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
 Response HTTP Status 200:
 
@@ -44,7 +44,7 @@ JSON:
 
 *headers*:
 
-&nbsp;Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization Bearer `<JWT Token>`
 
 Response HTTP Status 200:
 
@@ -54,9 +54,9 @@ Response HTTP Status 200:
 
 *headers*:
 
-&nbsp;Authorization Basic <Base64 Encoded id:password>*
+&nbsp;&nbsp;Authorization Basic `<Base64 Encoded id:password>`*
 
-&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
+&nbsp;&nbsp;\* where `id` - this is one of the your credentials from { `email`, `phone` }.
 To signin you could use `email` or `phone` encoded in `base64` code
 
 Response HTTP Status 201:
@@ -77,7 +77,7 @@ JSON:
 
 *headers*:
 
-&nbsp;Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
 Response HTTP Status 201:
 
@@ -99,7 +99,7 @@ Request
 
 *body*:
 
-&nbsp;as JSON: 
+&nbsp;&nbsp;as JSON: 
 
 ```json
 {
@@ -125,7 +125,7 @@ JSON
 
 *headers for all `file` endpoints*:
 
-&nbsp;Authorization `Bearer <JWT Token>`
+&nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
 ### File endpoinsts:
 
@@ -152,7 +152,7 @@ JSON:
         },
         ...
     ],
-    "offset": "<number>, default 0",
+    "offset": <number>, default 0,
     "limit": <number>, default 10,
     "total": <number>
 }
@@ -166,7 +166,7 @@ Request
 
 *Path params*:
 
-&nbsp;id: `<number>`
+&nbsp;&nbsp;id: `<number>`
 
 Response HTTP Status 200:
 
@@ -193,7 +193,7 @@ Request
 
 *Path params*:
 
-&nbsp;id: `<number>`
+&nbsp;&nbsp;id: `<number>`
 
 Response HTTP Status 200
 
@@ -222,7 +222,7 @@ Request
 
 *body*:
 
-&nbsp;body.file: Buffer
+&nbsp;&nbsp;body.file: Buffer
 
 Response HTTP Status 201:
 
@@ -253,7 +253,7 @@ Request
 
 *body*:
 
-&nbsp;body.file: Buffer
+&nbsp;&nbsp;body.file: Buffer
 
 Response HTTP Status 200 (if file exist):
 
