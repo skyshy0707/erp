@@ -24,7 +24,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 <code style="color : green">GET</code> /info 
 
-*headers*:
+***headers***:
 
 &nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
@@ -42,7 +42,7 @@ JSON:
 
 <code style="color : green">GET</code> /logout 
 
-*headers*:
+***headers***:
 
 &nbsp;&nbsp;Authorization Bearer `<JWT Token>`
 
@@ -52,7 +52,7 @@ Response HTTP Status 200:
 
 <code style="color : olive">POST</code> /signin 
 
-*headers*:
+***headers***:
 
 &nbsp;&nbsp;Authorization Basic `<Base64 Encoded id:password>`*
 
@@ -75,7 +75,7 @@ JSON:
 
 <code style="color : olive">POST</code> /signin/new_token 
 
-*headers*:
+***headers***:
 
 &nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
@@ -97,7 +97,7 @@ JSON:
 
 Request
 
-*body*:
+***body***:
 
 &nbsp;&nbsp;as JSON: 
 
@@ -123,7 +123,7 @@ JSON
 
 <h4>Prefix: /file<h4>
 
-*headers for all `file` endpoints*:
+***headers for all `file` endpoints***:
 
 &nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
@@ -164,7 +164,7 @@ JSON:
 
 Request
 
-*Path params*:
+***Path params***:
 
 &nbsp;&nbsp;id: `<number>`
 
@@ -191,7 +191,7 @@ JSON
 
 Request
 
-*Path params*:
+***Path params***:
 
 &nbsp;&nbsp;id: `<number>`
 
@@ -220,7 +220,7 @@ JSON
 
 Request
 
-*body*:
+***body***:
 
 &nbsp;&nbsp;body.file: Buffer
 
@@ -251,7 +251,7 @@ JSON
 
 Request
 
-*body*:
+***body***:
 
 &nbsp;&nbsp;body.file: Buffer
 
@@ -330,7 +330,7 @@ All protect endpoints which require JWT-authorization
 }
 ```
 
-### Token don't be found
+### Token was't found
 
 Occurs when token was retrieved but not found. Occurs rarely at this moment 
 between authorization processing and when user have been deleted 
