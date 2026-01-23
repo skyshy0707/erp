@@ -24,7 +24,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 <code style="color : green">GET</code> /info 
 
-***headers***:
+headers:
 
 &nbsp;&nbsp;Authorization `Bearer <JWT Token>`
 
@@ -42,7 +42,7 @@ JSON:
 
 <code style="color : green">GET</code> /logout 
 
-***headers***:
+headers:
 
 &nbsp;&nbsp;Authorization Bearer `<JWT Token>`
 
@@ -52,7 +52,7 @@ Response HTTP Status 200:
 
 <code style="color : olive">POST</code> /signin 
 
-***headers***:
+headers:
 
 &nbsp;&nbsp;Authorization Basic `<Base64 Encoded id:password>`*
 
