@@ -515,7 +515,7 @@ Status code 403
 ```json
 {
     "message": "Not enought rights",
-    "detail":" You don\'t have permissions for this action"
+    "detail":" You don't have permissions for this action"
 }
 ```
 
@@ -525,8 +525,8 @@ Status code 404
 
 ```json
 {
-    "message": "Resource doesn\'t exist",
-    "detail": "File doesn\'t exist with id=<number>"
+    "message": "Resource doesn't exist",
+    "detail": "File doesn't exist with id=<number>"
 }
 ```
 
@@ -541,8 +541,8 @@ This response returns also if you try to download not your own file
 
 ```json
 {
-    "message": "Resource doesn\'t exist",
-    "detail": "File with id=<number> doesn\'t exist or was deleted"
+    "message": "Resource doesn't exist",
+    "detail": "File with id=<number> doesn't exist or was deleted"
 }
 ```
 
@@ -588,7 +588,7 @@ Status code: 404
 
 ```json
 {
-    "message": "Resource doesn\'t exist",
+    "message": "Resource doesn't exist",
     "detail": "Requested file with id=<number> doesn't exist anymore"
 }
 ```
