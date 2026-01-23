@@ -211,7 +211,7 @@ Path params:
 
 <code style="color : purple">DELETE</code> /delete/:id
 
-```Request``
+```Request```
 
 Path params:
 
