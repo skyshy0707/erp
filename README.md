@@ -205,6 +205,8 @@ Path params:
 
 Response HTTP Status 200
 
+![file](https://www.vecteezy.com/vector-art/12688985-file-icon-3d-render)
+
 **Delete the file**
 
 <code style="color : purple">DELETE</code> /delete/:id
