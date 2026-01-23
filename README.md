@@ -26,7 +26,7 @@ to get objects for instancing db models and helps to avoid code repeating. And t
 
 ```Request```
 
-###### headers:
+###### &nbsp;headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
@@ -46,7 +46,7 @@ JSON:
 
 ```Request```
 
-###### headers:
+###### &nbsp;headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: Bearer `<JWT Token>`
 
@@ -58,7 +58,7 @@ JSON:
 
 ```Request```
 
-###### headers:
+###### &nbsp;headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: Basic `<Base64 Encoded id:password>`*
 
@@ -83,7 +83,7 @@ JSON:
 
 ```Request```
 
-###### headers:
+###### &nbsp;headers:
 
 &nbsp;&nbsp;&nbsp;Authorization: `Bearer <JWT Token>`
 
@@ -105,7 +105,7 @@ JSON:
 
 ```Request```
 
-###### body:
+###### &nbsp;body:
 
 &nbsp;&nbsp;&nbsp;as JSON: 
 
@@ -172,7 +172,7 @@ JSON:
 
 ```Request```
 
-###### Path params:
+###### &nbsp;path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
@@ -199,7 +199,7 @@ JSON
 
 ```Request```
 
-###### Path params:
+###### &nbsp;path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
@@ -213,7 +213,7 @@ JSON
 
 ```Request```
 
-###### Path params:
+###### &nbsp;path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
@@ -236,7 +236,7 @@ JSON
 
 ```Request```
 
-body:
+###### &nbsp;body:
 
 &nbsp;&nbsp;&nbsp;body.file: Buffer
 
@@ -267,7 +267,7 @@ JSON
 
 ```Request```
 
-body:
+###### &nbsp;body:
 
 &nbsp;&nbsp;body.file: Buffer
 
