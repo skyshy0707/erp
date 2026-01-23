@@ -213,7 +213,7 @@ Path params:
 
 ```Request```
 
-Path params:
+##### Path params:
 
 &nbsp;&nbsp;&nbsp;id: `<number>`
 
