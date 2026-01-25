@@ -629,6 +629,6 @@ Status code: 400
 docker compose up -d --build
 ```
 
-[!CAUTION]
-To test endpoints ensure that you have seen sentence: `Now I'm ready to take requests` 
+> [!WARNING]
+> To test endpoints ensure that you have seen sentence: `Now I'm ready to take requests` 
 from logs of service server docker container
