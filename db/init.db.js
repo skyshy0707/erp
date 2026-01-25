@@ -3,33 +3,42 @@ const {
     ConnectionRefusedError,
     DatabaseError,
     UniqueConstraintError
-} = require('sequelize')
+} = require('@sequelize/core')
 
 const db = require('./models/index')
 
-const initialize = () => { 
-    return new Promise((resolve, reject) => {
-        
-        db.sequelize.authenticate().then(
-            () => {
-                console.log("Autheticate was success")
 
-                try{
-                    db.sequelize.sync().then(
-                        () => {
-                            console.log("DB was synchronized")
-                        }
-                    )
-                    resolve()
-                }
-                catch(error){
-                    reject(error)
-                }
+const delay = async () => new Promise(
+    resolve => {
+        console.log(`Next attemption in 6 seconds`)
+        setTimeout(resolve, 6000)
+    }
+)
+
+const initialize = async () => { 
+
+    while (true){
+        try{
+            await db.sequelize.authenticate()
+            console.log("Authentification was success")
+            break
+        }
+        catch(error){
+            console.log(`Can't to connect to mysql database server`)
+            if (error instanceof ConnectionRefusedError){
+                await delay()
+                continue
             }
-        ).catch((error) => {
-            console.log(`Невозможно установить соединение. Details: ${error}`)
-        })
-    })   
+            break
+        }
+    }
+    try{
+        await db.sequelize.sync()
+        console.log("Dbs were created")
+    }
+    catch(error){
+        console.log(`Error was occured at sequelize synced datatables ${error}`)
+    }
 }
 
 initialize()

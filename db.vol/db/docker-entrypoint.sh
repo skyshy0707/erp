@@ -1,0 +1,1 @@
+mysql -u root -e "UPDATE mysql.user SET host='%' WHERE host='database';"

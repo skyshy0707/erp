@@ -9,7 +9,7 @@ module.exports = {
     MYSQL_PORT: 3306,
     MYSQL_DATABASE: env.MYSQL_DATABASE,
     SECRET_KEY: env.SECRET_KEY,
-    JWT_TOKEN_EXPIRES_IN: 6 * 10**3, // 10 minutes in ms 
+    JWT_TOKEN_EXPIRES_IN: 600 * 10**3, // 10 minutes in ms 
     FILE_UPLOAD_PATH: path.resolve(__dirname, './uploads'),
     DEV_MODE: true
 } 

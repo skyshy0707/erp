@@ -246,7 +246,9 @@ class JWTAuth extends Auth{
         if (!salt){
             token = await this.decryptAuth(authStr)
             jwtToken = await dao.getJWTToken(token)
-            salt = jwtToken.salt
+            if (jwtToken){
+                salt = jwtToken.salt
+            }
         }
         
         try{
@@ -264,7 +266,6 @@ class JWTAuth extends Auth{
             catch (error) { 
                 throw statement(reprState.token_not_found)
             }
-
             try {
                 assert.ok(!jwtToken.expired) 
             }

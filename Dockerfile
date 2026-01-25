@@ -1,7 +1,7 @@
 FROM nginx AS production-stage
 
 
-RUN apt-get update && apt-get install -y npm
+RUN apt-get -y update && apt-get install -y npm
 COPY . /code/
 WORKDIR /code
 RUN chmod 775 package.json
