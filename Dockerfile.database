@@ -4,5 +4,9 @@ RUN chown -R mysql:root /var/lib/mysql/
 
 COPY ./db.vol/db.conf/mysqld.cnf etc/mysql/conf.d
 
-RUN mysql -u root -e "UPDATE mysql.user SET host='%' WHERE host='database';"
+
 EXPOSE 3306 33060
+
+#RUN service start mysql
+RUN chmod -R 755 /var/run/mysqld/ .
+RUN mysql -u root -e "UPDATE mysql.user SET host='%' WHERE host='database';"
