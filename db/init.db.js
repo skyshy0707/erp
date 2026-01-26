@@ -34,7 +34,7 @@ const initialize = async () => {
     }
     try{
         await db.sequelize.sync()
-        console.log("Dbs were created")
+        console.log("Db's tables were created")
     }
     catch(error){
         console.log(`Error was occured at sequelize synced datatables ${error}`)
