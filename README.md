@@ -630,5 +630,5 @@ docker compose up -d --build
 ```
 
 > [!WARNING]
-> To test endpoints ensure that you have seen sentence: `Now I'm ready to take requests` 
-from logs of service server docker container
+> Before you test endpoints in `Postman` ensure that you have seen sentence: `Now I'm ready to take requests` 
+from output logs of service server docker container
