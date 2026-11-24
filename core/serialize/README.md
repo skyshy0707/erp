@@ -3,7 +3,7 @@
 This is an documentation with examples of code to define your own serializers via
 `serializer.js` module.
 
-Able to work with sequelize instances v. 7 instanced on extended Model class od @sequelize/core. 
+Able to work with sequelize instances v. 7 instanced on extended Model class of @sequelize/core. 
 Supporting instances based on rest of all versions of sequelize or current in the case of instances from models 
 which were defined as `sequelize.define` is unknown.
 
@@ -13,7 +13,7 @@ My serializer based on construction of two components:
 
 1) Scheme as Object, defining serialization rules, how and which keys should be included in final  Object.
 
-2) Sequelize model class. This is help to build the final result. As a source of defing field properties to
+2) Sequelize model class. This is help to build the final result. As a source of defining field properties to
 make resulting object with fieldset which are defined by an user in scheme (1).
 
 ## Dependencies
@@ -37,7 +37,7 @@ At the currency
 `@pk` <br> - will be primary keys
 `@virtual` <br> - will be fields of model with type `VIRTUAL`
 
-* `as` - an object structure, describing as a value will be setted in the result serialized object
+* `as` - an object structure, describing as a value will be set in the result serialized object
 
 This is definitely mapping as set of fields which values are serialization rules in it and value 
 sources also.
@@ -53,12 +53,12 @@ special structure:
     as?: `<string>`
 }
 
-* `method` - a function with parameters or nullary. Here, you should provide only such names of arguments which are exist in your serializer class properties. As a rule it is instance, because my serialzer doesn't support something else.
+* `method` - a function with parameters or nullary. Here, you should provide only such names of arguments which are exist in your serializer class properties. As a rule it is instance, because my serializer doesn't support something else.
 * `default` - default value for your field, supports any type besides function.
 * `as` - if you want specify field name that's differ from instance.
 
 
-Next property is only experemental:
+Next property is only experimental:
 
 * `assoc` - an object structure for serialize a nested object or an array. Also it is a mapping object that describes
 how to serialize nested:
@@ -179,7 +179,7 @@ This data would be like as:
 ```
 
 Then if you need that data after file upload to be processed successfully 
-througt sequelize model, your data should be like as:
+through sequelize model, your data should be like as:
 
 ```json
 
@@ -225,14 +225,14 @@ As you can see, you have to add some fieldset to exclude, define methods to
 compute extra fields (`extension`, `user_id`), and map fields to rename filename and
 mimetype to make database insert transaction be correct.
 
-Now you can define serializer class singletone as:
+Now you can define serializer class singleton as:
 
 ```javascript
 const { Serializer } = require('./serializer')
 const { FileDescriptor }  = require('../../db/models')
 const { FileUpload } = require('./schemes')
 
-const fileUploadSerializer = new Serializer(FileDescriptor, FileUopload)
+const fileUploadSerializer = new Serializer(FileDescriptor, FileUpload)
 
 module.exports = {
     fileUploadSerializer
